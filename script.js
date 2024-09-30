@@ -5,18 +5,20 @@ async function fetchTodo() {
             throw new Error('Network response was not ok');
         }
         const json = await response.json();
-        json.forEach((item) => {
-            const container = document.querySelector('.append-titles')
-            const newTitle = document.createElement('span')
-            newTitle.innerHTML =  item.title;
-            container.appendChild(newTitle)
-            
-        });
+        json.forEach((item) => appendData(item.title));
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
     }
 }
 
+const appendData = (title) => {
+    const container = document.querySelector('.append-titles')
+    const newTitle = document.createElement('span')
+    newTitle.innerHTML =  title;
+    container.appendChild(newTitle)
+}
 
-const button = document.getElementById('fetch-api-button');
-button.addEventListener('click', () => fetchTodo())
+window.onload = () => {
+    const button = document.getElementById('fetch-api-button');
+    button.addEventListener('click', () => fetchTodo())
+}
