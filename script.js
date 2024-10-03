@@ -17,7 +17,7 @@ async function fetchTodo(apiUrl) {
 
 
 // Append data in DOM 
-async function appendData(data) {
+function appendData(data) {
     const container = document.querySelector('.append-titles');
     data.forEach((item) => {
         const newTitle = document.createElement('span');
@@ -29,7 +29,7 @@ async function appendData(data) {
 // Helper function to store data from fetch function and pass on to appendData function
 const getData = async () => {
     const data = await fetchTodo(postApi);
-    await appendData(data);
+    appendData(data);
 }
 
 window.onload = () => {
