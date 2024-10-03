@@ -18,11 +18,14 @@ async function fetchTodo(apiUrl) {
 
 // Append data in DOM 
 function appendData(data) {
-    const container = document.querySelector('.append-titles');
+    const container = document.querySelector('.posts');
     data.forEach((item) => {
         const newTitle = document.createElement('div');
         newTitle.className = 'post';
         newTitle.innerHTML = item.title;
+        newTitle.addEventListener('click', () => {
+            console.log(item);
+        });
         container.appendChild(newTitle);
     });
 }
@@ -32,6 +35,7 @@ async function clickHandler() {
     const data = await fetchTodo(postApi);
     appendData(data);
 }
+
 
 window.onload = () => {
     const button = document.getElementById('fetch-api-button');
