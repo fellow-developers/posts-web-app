@@ -6,15 +6,32 @@
     <title>Document</title>
 </head>
 <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
     body {
+        padding: 1rem;
         display: grid;
         place-items: center;
+    }
+
+    .post {
+        margin: 1rem;
+        padding: 1rem;
+        border: 0.125rem solid black;
+    }
+
+    h1 {
+        padding: 1rem;
     }
 </style>
 <body>
     <button id="fetch-api-button">Click To Fetch</button>
+    <h1>API Titles</h1>
     <div class="append-titles">
-        <h1>API Titles</h1>
     </div>
 
 

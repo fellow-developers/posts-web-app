@@ -20,19 +20,20 @@ async function fetchTodo(apiUrl) {
 function appendData(data) {
     const container = document.querySelector('.append-titles');
     data.forEach((item) => {
-        const newTitle = document.createElement('span');
+        const newTitle = document.createElement('div');
+        newTitle.className = 'post';
         newTitle.innerHTML = item.title;
         container.appendChild(newTitle);
     });
 }
 
 // Helper function to store data from fetch function and pass on to appendData function
-const getData = async () => {
+async function clickHandler() {
     const data = await fetchTodo(postApi);
     appendData(data);
 }
 
 window.onload = () => {
     const button = document.getElementById('fetch-api-button');
-    button.addEventListener('click', getData);
+    button.addEventListener('click', clickHandler);
 }
