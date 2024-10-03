@@ -23,15 +23,15 @@ function appendData(data) {
         const newTitle = document.createElement('div');
         newTitle.className = 'post';
         newTitle.innerHTML = item.title;
+        newTitle.addEventListener('click', () => {
+            console.log(item)
+        })
         container.appendChild(newTitle);
     });
 }
 
-// Helper function to store data from fetch function and pass on to appendData function
-async function clickHandler() {
-    const data = await fetchTodo(postApi);
-    appendData(data);
-}
+
+
 
 window.onload = () => {
     const button = document.getElementById('fetch-api-button');
