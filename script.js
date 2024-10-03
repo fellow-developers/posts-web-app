@@ -30,7 +30,11 @@ function appendData(data) {
     });
 }
 
-
+// Helper function to store data from fetch function and pass on to appendData function
+async function clickHandler() {
+    const data = await fetchTodo(postApi);
+    appendData(data);
+}
 
 
 window.onload = () => {
