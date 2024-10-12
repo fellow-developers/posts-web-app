@@ -1,4 +1,3 @@
-
 const postApi = "https://jsonplaceholder.typicode.com/todos";
 
 // Fetch API Function
@@ -23,11 +22,34 @@ function appendData(data) {
         const newTitle = document.createElement('div');
         newTitle.className = 'post';
         newTitle.innerHTML = item.title;
-        newTitle.addEventListener('click', () => {
-            console.log(item);
-        });
+        newTitle.addEventListener('click', (e) => {
+
+        showClickedPost(e.target);
+        backButton();
+        
+    });
         container.appendChild(newTitle);
     });
+}
+
+function showClickedPost(clickedPost) {
+    const posts =  document.querySelectorAll('.post');
+    posts.forEach((post) => {
+        post.classList.add('hidden');
+        clickedPost.classList.remove('hidden')
+        document.querySelector('.back-button').classList.remove('hidden')
+    });
+}
+
+function backButton() {
+    const btn = document.querySelector('.back-button');
+    const posts =  document.querySelectorAll('.post');
+    btn.addEventListener('click', () => {
+        posts.forEach((post) => {
+            post.classList.remove('hidden')
+            btn.classList.add('hidden');
+        });
+    })
 }
 
 // Helper function to store data from fetch function and pass on to appendData function
