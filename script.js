@@ -18,7 +18,7 @@ async function fetchTodo(apiUrl) {
 
 // Append data in DOM 
 function appendData(data) {
-    const container = document.querySelector('.posts');
+    const container = document.querySelector('.post-container');
     data.forEach((item) => {
         const newTitle = document.createElement('div');
         newTitle.className = 'post';
