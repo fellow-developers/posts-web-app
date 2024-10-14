@@ -1,7 +1,12 @@
 const postApi = "https://jsonplaceholder.typicode.com/todos";
 
+// Check for api is fetched or not
+let isFetching = false;
+
 // Fetch API Function
 async function fetchTodo(apiUrl) {
+    if (isFetching) return; 
+    isFetching = true;
     try {
         const response = await fetch(apiUrl);
         if (!response.ok) {
@@ -23,10 +28,7 @@ function appendData(data) {
         newTitle.className = 'post';
         newTitle.innerHTML = item.title;
         newTitle.addEventListener('click', (e) => {
-
-        showClickedPost(e.target);
-        backButton();
-        
+        showClickedPost(e.target);        
     });
         container.appendChild(newTitle);
     });
@@ -41,7 +43,7 @@ function showClickedPost(clickedPost) {
     });
 }
 
-function backButton() {
+function backToAllPosts() {
     const btn = document.querySelector('.back-button');
     const posts =  document.querySelectorAll('.post');
     btn.addEventListener('click', () => {
@@ -56,6 +58,7 @@ function backButton() {
 async function clickHandler() {
     const data = await fetchTodo(postApi);
     appendData(data);
+    backButton();
 }
 
 
