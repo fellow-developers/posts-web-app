@@ -1,43 +1,44 @@
-
 const postApi = "https://jsonplaceholder.typicode.com/todos";
+let apiData;
 
 // Fetch API Function
 async function fetchTodo(apiUrl) {
-    try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const json = await response.json();
-        return json;
-    } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
     }
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+  }
 }
 
-
-// Append data in DOM 
+// Append data in DOM
 function appendData(data) {
-    const container = document.querySelector('.posts');
-    data.forEach((item) => {
-        const newTitle = document.createElement('div');
-        newTitle.className = 'post';
-        newTitle.innerHTML = item.title;
-        newTitle.addEventListener('click', () => {
-            console.log(item);
-        });
-        container.appendChild(newTitle);
+  const container = document.querySelector(".posts");
+  data.forEach((item) => {
+    const newTitle = document.createElement("div");
+    newTitle.className = "post";
+    newTitle.innerHTML = item.title;
+    newTitle.addEventListener("click", () => {
+      console.log(item);
     });
+    container.appendChild(newTitle);
+  });
 }
 
 // Helper function to store data from fetch function and pass on to appendData function
 async function clickHandler() {
+  if (apiData === undefined) {
     const data = await fetchTodo(postApi);
     appendData(data);
+    apiData = data;
+  }
 }
-
 
 window.onload = () => {
-    const button = document.getElementById('fetch-api-button');
-    button.addEventListener('click', clickHandler);
-}
+  const button = document.getElementById("fetch-api-button");
+  button.addEventListener("click", clickHandler);
+};
