@@ -1,4 +1,5 @@
 const postApi = "https://jsonplaceholder.typicode.com/posts";
+let apiData;
 
 // Check for api is fetched or not
 let isFetching = false;
@@ -17,6 +18,31 @@ async function fetchTodo(apiUrl) {
   } catch (error) {
     console.error("There was a problem with the fetch operation:", error);
   }
+}
+
+function showClickedPost(clickedPost) {
+  const posts = document.querySelectorAll(".post");
+  posts.forEach((post) => {
+    post.classList.add("hidden");
+    clickedPost.classList.remove("hidden");
+    document.querySelector(".back-button").classList.remove("hidden");
+  });
+
+  // const postBody = document.createElement('p');
+  // postBody.innerHTML = clickedPost.data.body;
+  // const container = document.querySelector('.post-container');
+  // container.appendChild(postBody)
+}
+
+function backToAllPosts() {
+  const btn = document.querySelector(".back-button");
+  const posts = document.querySelectorAll(".post");
+  btn.addEventListener("click", () => {
+    posts.forEach((post) => {
+      post.classList.remove("hidden");
+      btn.classList.add("hidden");
+    });
+  });
 }
 
 // Append data in DOM
@@ -60,9 +86,12 @@ function backToAllPosts() {
 
 // Helper function to store data from fetch function and pass on to appendData function
 async function clickHandler() {
-  const data = await fetchTodo(postApi);
-  appendData(data);
-  backToAllPosts();
+  if (apiData === undefined) {
+    const data = await fetchTodo(postApi);
+    appendData(data);
+    apiData = data;
+    backToAllPosts();
+  }
 }
 
 window.onload = () => {
