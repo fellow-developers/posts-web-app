@@ -1,5 +1,5 @@
 const postApi = "https://jsonplaceholder.typicode.com/posts";
-let apiData;
+let apiData = false;
 
 // Check for api is fetched or not
 let isFetching = false;
@@ -27,14 +27,9 @@ function showClickedPost(clickedPost) {
     clickedPost.classList.remove("hidden");
     document.querySelector(".back-button").classList.remove("hidden");
   });
-
-  // const postBody = document.createElement('p');
-  // postBody.innerHTML = clickedPost.data.body;
-  // const container = document.querySelector('.post-container');
-  // container.appendChild(postBody)
 }
 
-function backToAllPosts() {
+function registerBackToPostClickHandler() {
   const btn = document.querySelector(".back-button");
   const posts = document.querySelectorAll(".post");
   btn.addEventListener("click", () => {
@@ -59,38 +54,13 @@ function appendData(data) {
   });
 }
 
-function showClickedPost(clickedPost) {
-  const posts = document.querySelectorAll(".post");
-  posts.forEach((post) => {
-    post.classList.add("hidden");
-    clickedPost.classList.remove("hidden");
-    document.querySelector(".back-button").classList.remove("hidden");
-  });
-
-  // const postBody = document.createElement('p');
-  // postBody.innerHTML = clickedPost.data.body;
-  // const container = document.querySelector('.post-container');
-  // container.appendChild(postBody)
-}
-
-function backToAllPosts() {
-  const btn = document.querySelector(".back-button");
-  const posts = document.querySelectorAll(".post");
-  btn.addEventListener("click", () => {
-    posts.forEach((post) => {
-      post.classList.remove("hidden");
-      btn.classList.add("hidden");
-    });
-  });
-}
-
 // Helper function to store data from fetch function and pass on to appendData function
 async function clickHandler() {
-  if (apiData === undefined) {
+  if (apiData === false) {
     const data = await fetchTodo(postApi);
     appendData(data);
-    apiData = data;
-    backToAllPosts();
+    apiData = true;
+    registerBackToPostClickHandler();
   }
 }
 
