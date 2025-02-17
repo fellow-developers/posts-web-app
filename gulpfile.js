@@ -8,23 +8,18 @@ const uglify = require("gulp-uglify");
 const tsProject = ts.createProject("tsconfig.json");
 
 // Gulp task to compile TypeScript
-gulp.task("scripts", () => {
-  // Compile TypeScript files from src to dist
+gulp.task("ts", () => {
   return tsProject
     .src()
     .pipe(tsProject()) // Compile TypeScript files
     .pipe(uglify()) // Minify the output JavaScript
-    .pipe(gulp.dest("dist/js")); // Output to the 'dist' folder
+    .pipe(gulp.dest("dist/js")); // Output to the 'dist/js' folder
 });
 
-// Default Gulp task to watch for changes and run 'scripts'
-gulp.task(
-  "ts",
-  gulp.series("scripts", () => {
-    // Watch for changes in TypeScript files
-    gulp.watch("**/*.ts", gulp.series("scripts"));
-  })
-);
+// Watch task to monitor changes in TypeScript files
+gulp.task("watch-ts", () => {
+  gulp.watch("**/*.ts", gulp.series("ts")); // Trigger 'build' on TypeScript file changes
+});
 
 // Build sass
 gulp.task("sass", function () {
@@ -34,4 +29,9 @@ gulp.task("sass", function () {
     .pipe(sass({ style: "compressed" }).on("error", sass.logError)) // Compile Sass to CSS
     .pipe(sourcemaps.write("./maps")) // Output sourcemaps to a 'maps' directory
     .pipe(gulp.dest("dist/css"), { outputStyle: "compressed" }); // Destination for the compiled CSS
+});
+
+// Watch sass changes
+gulp.task("watch-sass", function () {
+  gulp.watch("**/*.scss", gulp.series("sass")); // Watch for changes in .scss files and run the 'sass' task
 });

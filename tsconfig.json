@@ -4,7 +4,7 @@
     "sourceMap": true, // Generate source maps for debugging
     "noImplicitAny": true, // Disallow 'any' type
     "target": "ES6", // Output JavaScript that is ES6 compatible
-    "module": "commonjs", // Use CommonJS module system
+    "module": "ESNext", // Use CommonJS module system
     "strict": true // Enable strict type checking
   },
   "include": ["**/*.ts"], // Include all TypeScript files in 'src' folder
