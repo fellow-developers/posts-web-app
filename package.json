@@ -4,8 +4,9 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build:sass": "gulp sass"
+    "build:sass": "gulp sass",
+    "build": "gulp ts sass",
+    "watch": "gulp watch-ts watch-sass"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,9 @@
     "gulp": "^5.0.0",
     "gulp-sass": "^6.0.0",
     "gulp-sourcemaps": "^3.0.0",
-    "sass": "^1.84.0"
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "gulp-uglify": "^3.0.2",
+    "sass": "^1.84.0",
+    "typescript": "^5.7.3"
   }
 }
