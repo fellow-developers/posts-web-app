@@ -7,18 +7,20 @@ const uglify = require("gulp-uglify");
 // Create a TypeScript project
 const tsProject = ts.createProject("tsconfig.json");
 
-// Gulp task to compile TypeScript
+// Gulp task to compile TypeScript and generate source maps
 gulp.task("ts", () => {
   return tsProject
     .src()
+    .pipe(sourcemaps.init()) // Initialize source maps
     .pipe(tsProject()) // Compile TypeScript files
     .pipe(uglify()) // Minify the output JavaScript
+    .pipe(sourcemaps.write("./maps")) // Write the source maps to the same directory
     .pipe(gulp.dest("dist/js")); // Output to the 'dist/js' folder
 });
 
 // Watch task to monitor changes in TypeScript files
 gulp.task("watch-ts", () => {
-  gulp.watch("**/*.ts", gulp.series("ts")); // Trigger 'build' on TypeScript file changes
+  gulp.watch("**/*.ts", gulp.series("ts")); // Trigger 'ts' on TypeScript file changes
 });
 
 // Build sass
