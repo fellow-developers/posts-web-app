@@ -6,17 +6,22 @@
   "scripts": {
     "build:sass": "gulp sass",
     "build": "gulp ts sass",
-    "watch": "gulp watch-ts watch-sass"
+    "watch": "gulp watch-ts watch-sass",
+    "lint:fix": "eslint ."
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "eslint": "^9.20.1",
+    "globals": "^16.0.0",
     "gulp": "^5.0.0",
     "gulp-sass": "^6.0.0",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "gulp-uglify": "^3.0.2",
     "sass": "^1.84.0",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.1"
   }
 }
